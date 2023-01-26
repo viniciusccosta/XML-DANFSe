@@ -1,0 +1,479 @@
+/* ============================================================================================= */
+/* http://www.cssdrive.com/cssautoprefixer/ */
+
+/* Página A4 */
+body {
+    display: -webkit-box;
+
+    display: -ms-flexbox;
+
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+}
+
+/* ============================================================================================= */
+/* Globais */
+.conteudo {
+    margin: 0.5cm;
+    min-width: 19cm; /* 21cm - 2cm de cada margem: 19cm  */
+    min-height: 27.7cm; /* 29.7 - cm de cada margem: 27,7cm */
+
+    /* padding: 5px; */
+    /* background-color: rgb(255, 119, 119); */
+
+    -webkit-box-flex: 1;
+
+        -ms-flex-positive: 1;
+
+            flex-grow: 1;
+
+    display: -webkit-box;
+
+    display: -ms-flexbox;
+
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    row-gap: 5px;
+}
+
+.container {
+    border: 2px solid black;
+    border-radius: 2px;
+
+    display: -webkit-box;
+
+    display: -ms-flexbox;
+
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+}
+
+.stack {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+}
+
+.inline {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+}
+
+.inline > * {
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
+}
+
+.subheader {
+    font-size: 15px;
+    color: black;
+    font-weight: bold;
+    border-bottom: 2px solid black;
+    padding: 5px;
+    /* background-color: antiquewhite; */
+}
+
+.mini-header {
+    font-size: 10px;
+}
+
+label {
+    text-align: left;
+}
+
+/* ============================================================================================= */
+/* Containers */
+#cabecalho {
+    /* Linha 1 */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: stretch;
+        -ms-flex-align: stretch;
+            align-items: stretch; /* Esticar horizontalmente */
+}
+
+#cabecalho > div {
+    /* Todas as colunas */
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    /* background-color: aqua; */
+    /* margin: 2px; */
+}
+
+#dados_gdf_container {
+    -webkit-box-flex: 3;
+        -ms-flex: 3;
+            flex: 3;
+}
+
+#cabecalho > div:last-child {
+    /* Todas as colunas do meio (entre a primeira e a última) */
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+}
+
+#cabecalho > div:nth-child(n+2):not(:last-child) {
+    /* Todas as colunas do meio (entre a primeira e a última) */
+    border-right: 1px solid black;
+}
+
+#cabecalho > div > div:not(:last-child) {
+    /* Linhas da última coluna */
+    border-bottom: 1px solid black;
+}
+
+#logo_nfe_container {
+    -webkit-box-flex: 0;
+        -ms-flex: 0;
+            flex: 0; /* Usando o mínimo de espaço horizontalmente */
+
+    display: -webkit-box;
+
+    display: -ms-flexbox;
+
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center; /* Fazer com que todos os filhos estique horizontalmente: align-items: stretch */
+}
+
+#logo_nfe {
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1; /* Se auto-esticar verticalmente */
+    /* background-color: blueviolet; */
+    min-width: 90px;
+    max-height: 65px;
+
+    display: -webkit-box;
+
+    display: -ms-flexbox;
+
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
+
+#gdf_icon_container {
+    -webkit-box-flex: 0;
+        -ms-flex: 0;
+            flex: 0; /* Usando o mínimo de espaço horizontalmente */
+
+    display: -webkit-box;
+
+    display: -ms-flexbox;
+
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center; /* Fazer com que todos os filhos estique horizontalmente: align-items: stretch */
+}
+
+#gdf_icon {
+    /* flex: 1;                        Se auto-esticar verticalmente */
+    /* background-color: blueviolet; */
+    min-width: 41px;
+    max-width: 41px;
+    min-height: 49px;
+    max-height: 49px;
+
+    display: -webkit-box;
+
+    display: -ms-flexbox;
+
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
+
+#tipo_rps,
+#numero_nf {
+    font-weight: bold;
+    text-align: center;
+}
+
+/* ---------------------------------------------------------- */
+/* Dados do Prestador de Serviço */
+
+#prestador > div {
+    /* Linha 1 (Título) e Linha 2 (Dados) */
+    -webkit-box-align: stretch;
+        -ms-flex-align: stretch;
+            align-items: stretch; /* As duas linhas irão ter a altura máxima possível */
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+}
+
+#prestador > div > div {
+    /* Coluna 1 (informações do prestador), Coluna 2 (Dados da NFSe), Coluna 3 (QR Code) */
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+}
+
+#prestador > div > div:nth-child(1) {
+    /* Coluna 1 (informações do prestador)*/
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+}
+
+#prestador > div > div:nth-child(2) {
+    /* Coluna 2 (Dados da NFSe)*/
+    -webkit-box-flex: 0;
+        -ms-flex: 0;
+            flex: 0;
+    min-width: 4cm;
+}
+
+#prestador > div > div:not(:last-child) {
+    /* Coluna 1 (informações do prestador) e Coluna 2 (Dados da NFSe)*/
+    border-right: 1px solid black;
+}
+
+#prestador_info {
+    /* Coluna 1 */
+    padding: 10px;
+}
+
+#prestador > div > div:nth-child(2) > div {
+    /* Linhas da Coluna 2 (Dados da NFSe) */
+    padding: 2px;
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1; /* Se auto esticando verticalmente */
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+}
+
+#prestador > div > div:nth-child(2) > div:not(:last-child) {
+    /* Linhas da Coluna 2 (Dados da NFSe) */
+    border-bottom: 1px solid black;
+}
+
+#prestador > div > div:nth-child(2) > div > div {
+    /* Texto de cáda célula da coluna 2 */
+    min-height: 15px;
+    font-size: 14px;
+}
+
+#qrcode_container {
+    /* Coluna 3 */
+    -webkit-box-flex: 0;
+        -ms-flex: 0;
+            flex: 0;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    margin: 5px;
+}
+
+#qrcode {
+    min-width: 99px;
+    max-width: 99px;
+    min-height: 99px;
+    max-height: 99px;
+    background-color: blueviolet;
+}
+
+#prestador_razao_social,
+#prestador_nome_fantasia {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+#data_geracao,
+#data_competencia,
+#cod_autencidade,
+#reponsavel_retencao {
+    font-weight: bold;
+    text-align: center;
+}
+
+/* ---------------------------------------------------------- */
+/* Identificação da Nota Fiscal Eletrônica */
+#identificacao_nfe > div {
+    /* Linha 1 (Título) e Linha 2 (Dados) */
+    -webkit-box-align: stretch;
+        -ms-flex-align: stretch;
+            align-items: stretch; /* As duas linhas irão ter a altura máxima possível */
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+}
+
+#identificacao_nfe > div > div:not(:last-child) {
+    /* Dentro da linha de dados: Linha 1 (Natureza, RPS, Série, ...) e Linha 2 (Local, Município) */
+    border-bottom: 1px solid black;
+}
+
+#identificacao_nfe > div > div > div {
+    /* Cada célula, dentro de cada linha */
+    padding: 2px;
+    font-size: 14px;
+}
+
+#identificacao_nfe > div > div > div:not(:last-child) {
+    /* Cada célula, dentro de cada linha */
+    border-right: 1px solid black;
+}
+
+#tomador > table > tbody tr, td {
+    /* Tabela */
+    font-size: 14px;
+}
+
+#tomador > table > tbody > tr > td:nth-child(odd) {
+    /* Colunas ímpares da tabela */
+    font-weight: bold;
+}
+
+/* ---------------------------------------------------------- */
+/* Intermediário */
+#intermediario > div {
+    /* Linha 1 (Título) e Linha 2 (Dados) */
+    -webkit-box-align: stretch;
+        -ms-flex-align: stretch;
+            align-items: stretch; /* As duas linhas irão ter a altura máxima possível */
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+}
+
+#intermediario > div:nth-child(2) {
+    padding: 5px;
+}
+
+#intermediario label.mini-header {
+    font-weight: bold;
+}
+
+#intermediario label {
+    min-height: 11px;
+}
+
+/* ---------------------------------------------------------- */
+/* Serviços */
+#descricao_servico {
+    min-height: 150px;
+}
+
+/* ---------------------------------------------------------- */
+/* Dados dos Tributos */
+#tributos div {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#tributos > div {
+    /* Linha 1 (Título) e Linha 2 (Dados) */
+    -webkit-box-align: stretch;
+        -ms-flex-align: stretch;
+            align-items: stretch; /* As duas linhas irão ter a altura máxima possível */
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+}
+
+#tributos > div > div:not(:last-child) {
+    /* Dentro da linha de dados: Linha 1 (Natureza, RPS, Série, ...) e Linha 2 (Local, Município) */
+    border-bottom: 1px solid black;
+}
+
+#tributos > div > div > div {
+    /* Cada célula, dentro de cada linha */
+    padding: 2px;
+}
+
+#tributos > div > div > div:not(:last-child) {
+    /* Cada célula, dentro de cada linha */
+    border-right: 1px solid black;
+}
+
+#atividade_municipio {
+    max-width: 22rem;
+    width: 22rem;
+}
+
+#valor_total,
+#desconto_incondicionado,
+#deducao_base_calculo,
+#base_calculo,
+#total_issqn,
+#desconto_condicionado,
+#pis,
+#cofins,
+#inss,
+#irrf,
+#csll,
+#outras_retencoes,
+#valor_issqn,
+#valor_liquido {
+    text-align: right;
+}
+
+#aliquota, #valor_total, #valor_liquido {
+    font-weight: bold;
+}
+
+/* ---------------------------------------------------------- */
+/* Informações Adicionais */
+#informacoes > div {
+    /* Linha 1 (Título) e Linha 2 (Dados) */
+    -webkit-box-align: stretch;
+        -ms-flex-align: stretch;
+            align-items: stretch; /* As duas linhas irão ter a altura máxima possível */
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+}
+
+#informacoes > div:nth-child(2) {
+    padding: 5px;
+    min-height: 15px;
+}
+
+/* ============================================================================================= */
+/* Rodapé */
+.rodape {
+    text-align: center;
+}
+
+/* ============================================================================================= */

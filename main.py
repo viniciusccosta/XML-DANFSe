@@ -1,6 +1,8 @@
 # ======================================================================================================================
 import xmltodict
 import jinja2
+import pdfkit
+import webbrowser
 
 from tkinter        import filedialog
 from os             import path
@@ -253,36 +255,48 @@ class NFSe:
         return str(self.__dict__)
 
 # ======================================================================================================================
-def read_xml(xmlfile: str):
+def xml_to_dict(xmlfile: str):
     with open(xmlfile, 'r', encoding='utf8', ) as f:
         result = xmltodict.parse(f.read())
         return result
 
-def render_html(nfse: NFSe,):
+def render_html(nfse: NFSe) -> str:
     env  = jinja2.Environment(loader = jinja2.FileSystemLoader('./'))
     html = env.get_template('templates/nfse.html').render(nfse.get_formated())
     return html
 
-def save_html(html, xml_filename):
-    xml_filename  = path.splitext(xml_filename)[0]
+def save_pdf(html: str, filepath) -> str:
+    html_fileroot = path.splitext(filepath)[0]
     agora         = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
-    html_filename = f'{xml_filename}-{agora}.html'
+    pdf_filename  = f'{html_fileroot}-{agora}.pdf'
 
-    with open(html_filename, 'w', encoding='utf8') as hf:
-        hf.write(html)
+    config   = pdfkit.configuration(wkhtmltopdf=r"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe")
+    css_path = path.abspath("./templates/static/css/nfse.css")
+    options  = {
+        "enable-local-file-access"  : "",
+        'encoding'                  : 'UTF-8',
+        'margin-left'               : '0mm',
+        'margin-right'              : '0mm',
+        'margin-bottom'             : '0mm',
+        'margin-top'                : '0mm',
+    }
+    pdfkit.from_string(html, pdf_filename, css=css_path, configuration=config, options=options)
+
+    return pdf_filename
 
 def main():
     files = filedialog.askopenfilenames(filetypes=[('XML', '*.xml')])
 
-    for file in files:
+    for filepath in files:
         try:
-            xml_dict = read_xml(file)
+            xml_dict = xml_to_dict(filepath)
             nfse     = NFSe(xml_dict)
             html     = render_html(nfse)
 
-            save_html(html, file)
+            pdf_filename = save_pdf(html, filepath)
+            webbrowser.open(f'file:///{pdf_filename}', new=2)
         except Exception as e:
-            print(f"Erro ao gerar HTML do arquivo {file}: ", repr(e), )
+            print(f"Erro ao gerar HTML do arquivo {filepath}: ", repr(e), )
 
 # ======================================================================================================================
 if __name__ == "__main__":
