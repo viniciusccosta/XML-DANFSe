@@ -260,10 +260,20 @@ def xml_to_dict(xmlfile: str):
         result = xmltodict.parse(f.read())
         return result
 
-def render_html(nfse: NFSe) -> str:
+def render_html(nfse: NFSe, template_filename) -> str:
     env  = jinja2.Environment(loader = jinja2.FileSystemLoader('./'))
-    html = env.get_template('templates/nfse.html').render(nfse.get_formated())
+    html = env.get_template(template_filename).render(nfse.get_formated())
     return html
+
+def save_html(html, filepath):
+    html_fileroot = path.splitext(filepath)[0]
+    agora         = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
+    html_filename = f'{html_fileroot}-{agora}.html'
+
+    with open(html_filename, 'w', encoding='utf8') as hf:
+        hf.write(html)
+
+    return html_filename
 
 def save_pdf(html: str, filepath) -> str:
     html_fileroot = path.splitext(filepath)[0]
@@ -271,7 +281,7 @@ def save_pdf(html: str, filepath) -> str:
     pdf_filename  = f'{html_fileroot}-{agora}.pdf'
 
     config   = pdfkit.configuration(wkhtmltopdf=r"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe")
-    css_path = path.abspath("./templates/static/css/nfse.css")
+    css_path = path.abspath("templates/static/css/nfse_pdf.css")
     options  = {
         "enable-local-file-access"  : "",
         'encoding'                  : 'UTF-8',
@@ -284,22 +294,38 @@ def save_pdf(html: str, filepath) -> str:
 
     return pdf_filename
 
-def main():
+def main(save_htmlfile=False):
     files = filedialog.askopenfilenames(filetypes=[('XML', '*.xml')])
 
     for filepath in files:
         try:
             xml_dict = xml_to_dict(filepath)
             nfse     = NFSe(xml_dict)
-            html     = render_html(nfse)
+        except Exception as e:
+            print(f"Erro ao ler arquivo XML {filepath}: ", repr(e), )
+            continue
 
-            pdf_filename = save_pdf(html, filepath)
+        if save_htmlfile:
+            try:
+                html           = render_html(nfse, 'templates/nfse.html')
+                html_fiilename = save_html(html, filepath)
+
+                webbrowser.open(html_fiilename, new=2)
+            except Exception as e:
+                print(f"Erro ao gerar HTML do arquivo {filepath}: ", repr(e), )
+                continue
+
+        try:
+            html_pdf     = render_html(nfse, 'templates/nfse_pdf.html')
+            pdf_filename = save_pdf(html_pdf, filepath)
+
             webbrowser.open(f'file:///{pdf_filename}', new=2)
         except Exception as e:
-            print(f"Erro ao gerar HTML do arquivo {filepath}: ", repr(e), )
+            print(f"Erro ao gerar PDF  do arquivo {filepath}: ", repr(e), )
+            continue
 
 # ======================================================================================================================
 if __name__ == "__main__":
-    main()
+    main(save_htmlfile=True)
 
 # ======================================================================================================================
