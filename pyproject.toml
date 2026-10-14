@@ -1,0 +1,35 @@
+[project]
+name = "xml-danfse"
+version = "0.1.0"
+description = "Gere arquivos PDF a partir do XML"
+authors = [{ name = "viniciusccosta", email = "viniciusccosta95@gmail.com" }]
+license = "MIT"
+requires-python = ">=3.13"
+scripts = { xml-danfse = "xml_danfse.application:run" }
+dependencies = [
+    "babel (>=2.18.0,<3.0.0)",
+    "jinja2 (>=3.1.6,<4.0.0)",
+    "pdfkit (>=1.0.0,<2.0.0)",
+    "python-dateutil (>=2.9.0.post0,<3.0.0)",
+    "xmltodict (>=1.0.4,<2.0.0)",
+]
+
+[tool.poetry]
+packages = [{ include = "xml_danfse", from = "src" }]
+include = [
+    { path = "src/xml_danfse/templates/**/*", format = [
+        "sdist",
+        "wheel",
+    ] },
+]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[dependency-groups]
+dev = [
+    "pre-commit (>=4.7.0,<5.0.0)",
+    "black (>=26.10.1,<27.0.0)",
+    "isort (>=9.0.2,<10.0.0)",
+]
