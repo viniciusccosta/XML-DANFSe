@@ -5,6 +5,7 @@ description = "Gere arquivos PDF a partir do XML"
 authors = [{ name = "viniciusccosta", email = "viniciusccosta95@gmail.com" }]
 license = "MIT"
 requires-python = ">=3.13"
+scripts = { xml-danfse = "xml_danfse.application:run" }
 dependencies = [
     "babel (>=2.18.0,<3.0.0)",
     "jinja2 (>=3.1.6,<4.0.0)",
@@ -14,8 +15,13 @@ dependencies = [
 ]
 
 [tool.poetry]
-package-mode = false
-
+packages = [{ include = "xml_danfse", from = "src" }]
+include = [
+    { path = "src/xml_danfse/templates/**/*", format = [
+        "sdist",
+        "wheel",
+    ] },
+]
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]

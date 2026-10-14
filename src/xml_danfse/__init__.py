@@ -1,0 +1,1 @@
+"""Geração de DANFSe a partir de arquivos XML."""
